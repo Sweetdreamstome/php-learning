@@ -382,3 +382,325 @@ if ($num == $guess){
 }
 
 ?>
+<?php
+//for arithmetical stuff:
+    echo 5 * 6 + 3 - 1. '<br>';
+    echo 5 ** 2; //exponential
+?>
+<?php
+$a = 5;
+if ( $a % 2 == 0) {
+    echo "<p>$a is even. </p>";
+} else {
+    echo "<p>$a is odd. </p>"
+}
+
+$a = 15;
+$b = 5;
+
+echo ( $a % $b == 0) ? "<p> $b is a factor of $a</p>" : "<p> $b is not a factor of $a</p>";
+echo -$a % 2;
+?>
+<?php
+$a = 5;
+//this will still be 5
+echo 'The value of $a is '.$a++.'<br/>';
+//This will be 6
+echo 'Now $a is '. $a . '<br/>';
+exit();
+echo 'The value of $a is '. ++$a. '<br/>';
+//This will still be 6
+echo 'Now $a is '.$a.'<br/>';
+?>
+
+<?php
+//other way with exit()
+$a = 5;
+//this will be 6
+echo 'The value of $a is '.--$a.'<br/>';
+//This will be 6
+echo 'Now $a is '. $a . '<br/>';
+
+$a=5;
+echo 'The value of $a is '. $a--. '<br/>';
+//This will still be 6
+echo 'Now $a is '.$a.'<br/>';
+
+$a = 'A';
+echo '$a is '. ++$a. '<br/>';
+//from A to B: increment
+
+$a = 1;
+$a += 5;
+echo $a;
+$a = 1;
+$a -= 5;
+echo $a;
+$a = 1;
+$a *= 5;
+echo $a;
+$a = 1;
+$a /= 5;
+echo $a;
+
+?>
+<?php
+//Challenge
+$result = array();
+
+$result[] = (14 + 82 - (32/2))**2;
+$result[] = 18 * ((3 / 6) - 9)*10;
+$result[] = 5*((12 / 2) - (8 * 4 )+ (12 * 6));
+
+echo '<pre>';
+print_r( $result );
+echo '</pre>';
+?>
+<?php
+$i = 0;
+
+do {
+    echo "<p>$i</p>";
+    $i++;
+} while ( $i < 10);
+
+while ( $i < 10 ) {
+    echo "<p>$i</p>";
+    $i++;
+}
+
+for ( $i = 0; $i < 10; $i++){
+    echo "<p>$i</p>";
+}
+
+$colors = array('red', 'blue', 'green', 'yellow');
+for ( $i = 0; $i < sizeof($colors); $i++){
+    echo '<p>'.$colors[$i]. '</p>';
+}
+
+foreach ( $colors as $color ){
+    echo "<p>$color</p>";
+}
+
+$home_towns = array(
+    'Joe' => 'Middletown, NY',
+    'Erin' => 'West Chester, PA',
+    'Dave' => 'Exton, PA',
+    'Brian' => 'Grand Rapids, MI'
+
+);
+
+foreach ($home_towns as $name => $town) {
+    echo "<p>$name lives in $town</p>";
+}
+?>
+<?php
+$current = 1;
+$previous = 0;
+$next = null;
+$limit = 200;
+$sequence = '';
+while ( $current < $limit ){
+    //echo $current.',';
+    $sequence .= $current . ', ';
+    $next = $current + $previous;
+    $previous = $current;
+    $current = $next;
+
+}
+
+$sequence = trim($sequence);
+$sequence = substr($sequence,0,strlen($sequence)-1);
+
+echo $sequence
+?>
+
+<?php
+//detecting if a string is a palindrome, string that reads the same backwards and forwards
+function is_palindrome( $string ){
+    $pal_check =  ( $string == strrev($string) ); //built in function that gives the reverse
+    return $pal_check;
+}
+
+$check_string = 'wow'
+if (is_palindrome($check_string)){
+    echo "<p>$check_string is a palindrome</p>";
+}
+
+//so lower cases and upper cases dont matter:
+    function is_palindrome( $string ){
+        $string = strtolower( $string );
+        $string = str_replace(' ', '', $string);
+        $pal_check =  ( $string == strrev($string) ); //built in function that gives the reverse
+        return $pal_check;
+    }
+    
+    $check_string = 'wow'
+    if (is_palindrome($check_string)){
+        echo "<p>$check_string is a palindrome</p>";
+    }
+?>
+<?php
+function multiplier($a, $multiplier = 2){
+    return $a*$multiplier;
+}
+echo multiplier(4, 4);
+
+function math($a, $b = 2, $op = 'multiply'){
+    if ('add' == $op){
+        return $a + $b;
+    } else if ('sub' == $op){
+        return $a - $b;
+    } else if ('divide' == $op){
+        return $a / $b;
+    }
+    return $a * $b;
+}
+
+//echo math(4, op: 'add'); //PARA PHP 8
+
+$names = array('Joe', 'Erin', 'Teresa', 'Louis');
+usort($names, function($a, $b){
+    return $a[1] <=> $b[1];
+});
+?>
+<pre>
+    <?php print_r($names); ?>
+</pre>
+
+<?php 
+// Define a simple person class
+class Person {
+    var $name;
+    var $age;
+    var $birthday = false;
+
+    function __construct( $name, $age){
+        $this->name = $name;
+        $this->age = $age;
+    }
+
+    public function get_name() {
+        return $this->name;
+    }
+    public function get_age(){
+        return $this->age;
+    }
+    public function set_name($new_name){
+        $this->name = $new_name;
+    }
+    public function set_birthday($b){
+        $this->birthday = $b;
+        $this->update_age();
+    }
+    private function update_age(){
+        $this->age = ($this->birthday) ? ++$this->age : $this->age;
+    }
+}
+
+$joe = new Person('Joe', 35);
+$rob = new Person('Rob', 30);
+
+echo $joe->get_name() . '<br>';
+echo $rob->get_name();
+
+$joe->set_birthay(true);
+$joe->update_age();
+$joe->get_age();
+//i'm calling from a public, i just can call it from the function. Actually you can't call the
+//private function, solo sirve para interno.
+?>
+
+<?php
+class Person {
+    var $first_name;
+    var $last_name;
+
+    function __construct( $fn, $ln ) {
+        $this->first_name = $fn;
+        $this->last_name = $ln;
+    }
+
+    public function get_first_name() {
+        return $this->first_name;
+    }
+
+    public function get_last_name() {
+        return $this->last_name;
+    }
+
+}
+
+// Challenge: Sort this array of Person objects by last, then first name! 
+
+$rob = new Person( 'Rob', 'Casabona' );
+$joe = new Person( 'Joe', 'Casabona' );
+$erin = new Person( 'Erin', 'Casabona' );
+$steve = new Person( 'Steve', 'Wozniack' );
+$bill = new Person( 'Bill', 'Gates' );
+$walt = new Person( 'Walt', 'Disney' );
+$bob = new Person( 'Bob', 'Iger' );
+
+$people = array( $rob, $joe, $erin, $steve, $bill, $walt, $bob );
+
+usort($people, function($a, $b){
+    return [$a->get_last_name(), $a->get_first_name()] <=> [$b->get_last_name(), $b->get_first_name()];
+    }
+);
+?>
+<!-- <pre>
+    <?//php print_r($people);?>
+</pre> -->
+
+<?php
+//way of printing errors in servers you cant control ini
+?>
+
+<?php
+error_reporting(E_ALL);
+$a = 2;
+if ( ($a < 2)) {
+    echo "Hello!";
+}
+
+set_cookie( 'error', true);
+?>
+
+<h1>Hello!</h1>
+
+<h1>Types of Errors</h1>
+
+<h3>Parse Error</h3>
+<?php echo 'I\'ve been around the block!'; ?>
+
+<p>Parse: Has code terminated?</p>
+
+<h3>Warning Error</h3>
+<?php include 'variables.php'; ?>
+<p>Warning: Has code terminated?</p>;
+
+<h3>Fatal Error</h3>
+<?php echo multiply(3, 2); ?>
+<p>Fatal: Has code terminated?</p>
+
+<h3>Notice Error</h3>
+<?php echo $x; ?>
+<p>Notice: has code terminated?</p>
+
+<?php
+//Must return positive integer
+function multiply($a, $b){
+    $x = $a * $b;
+    if ($x < 0){
+        throw new Exception("The result is not positive.");
+    }else{
+        return $x;
+    }
+}
+
+try {
+    echo multiply(-5, 4);
+} catch (Exception $e){
+    echo $e->getMessage();
+} //parecido al de python honestly! 
+
